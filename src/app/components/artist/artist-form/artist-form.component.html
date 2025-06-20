@@ -1,0 +1,41 @@
+<div class="container">
+  <h2>{{ isEditMode ? 'Edit artist' : 'Add New artist' }}</h2>
+
+
+
+  <form [formGroup]="artistForm" (ngSubmit)="onSubmit()">
+
+    <div class="mb-3">
+      <label for="firstName" class="form-label">First Name</label>
+
+
+      <input id="firstName" type="text" class="form-control" formControlName="firstName" />
+      <div *ngIf="artistForm.get('firstName')?.touched && artistForm.get('firstName')?.invalid" class="text-danger">
+        <small>First name is required.</small>
+      </div>
+    </div>
+
+    <div class="mb-3">
+
+      <label for="lastName" class="form-label">Last Name</label>
+      <input id="lastName" type="text" class="form-control" formControlName="lastName" />
+      <div *ngIf="artistForm.get('lastName')?.touched && artistForm.get('lastName')?.invalid" class="text-danger">
+        <small>Last name is required.</small>
+      </div>
+    </div>
+
+
+    <div class="mb-3">
+      <label for="country" class="form-label">country</label>
+      <input id="country" type="text" class="form-control" formControlName="country" />
+      <div *ngIf="artistForm.get('country')?.touched && artistForm.get('country')?.invalid" class="text-danger">
+        <small>Country name is required</small>
+      </div>
+    </div>
+       <button type="submit" class="btn btn-success me-2" [disabled]="artistForm.invalid">
+      {{ isEditMode ? 'Update' : 'Create' }}
+    </button>
+    <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+  </form>
+  <div *ngIf="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
+</div>

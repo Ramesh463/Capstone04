@@ -1,0 +1,47 @@
+<div class="container">
+  <h2>{{ isEditMode ? 'Edit Track' : 'Add New Track' }}</h2>
+  <form [formGroup]="trackForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input id="title" type="text" class="form-control" formControlName="title" />
+      <div *ngIf="trackForm.get('title')?.touched && trackForm.get('title')?.invalid"
+           class="text-danger">
+        <small>Title</small>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="duration" class="form-label">Duration</label>
+      <input id="duration" type="text" class="form-control" formControlName="duration" />
+      <div *ngIf="trackForm.get('duration')?.touched && trackForm.get('duration')?.invalid" class="text-danger">
+        <small>duration</small>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="releaseDate" class="form-label">Release Date</label>
+      <input id="releaseDate" type="date" class="form-control" formControlName="releaseDate" />
+      <div *ngIf="trackForm.get('releaseDate')?.touched && trackForm.get('releaseDate')?.invalid" class="text-danger">
+        <small>releaseDate</small>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="genre" class="form-label">Genre</label>
+      <select id="genre" class="form-select" formControlName="genre">
+        <option [ngValue]="null">-- Select Genre --</option>
+        <option *ngFor="let key of genreEnumKeys" [ngValue]="key">{{ genre[key] }}</option>
+      </select>
+      <div *ngIf="trackForm.get('status')?.touched && trackForm.get('genre')?.invalid" class="text-danger">
+        <small>Genre is required.</small>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-success me-2" [disabled]="trackForm.invalid">
+      {{ isEditMode ? 'Update' : 'Create' }}
+    </button>
+    <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+
+  </form>
+   <div *ngIf="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
+</div>

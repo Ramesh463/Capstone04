@@ -1,0 +1,14 @@
+<div>
+  <ul>@for (album of albums; track album.id){
+
+    <li>
+      {{album.albumName}}--{{album.genre}}{{album.track}} <button (click)="editAlbum(album)" class="btn btn-sm btn-info me-2">Edit</button>
+      <button (click)="manageArtists(album)" class="btn btn-sm btn-info me-2">Manager Artist</button>
+
+
+    </li>
+  }
+  </ul>
+
+
+  </div>

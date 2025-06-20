@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="position">
+    <button mat-fab aria-label="Example icon button with a delete icon" (click)="addArtist()">
+      <mat-icon>add</mat-icon>
+    </button>
+
+  </div>
+  <div class="row">
+    @for (artist of artists; track artist.id) {
+
+    <div class="card-client">
+
+      <div class="user-picture">
+
+      <mat-icon>person</mat-icon>
+      </div>
+      <p class="name-client"> {{artist.firstName}} {{artist.lastName}}
+        <span>
+        </span>
+      </p>
+
+      <div class="social-media">
+      </div>
+      <p class="name-client"> {{artist.country}}
+        <span>
+        </span>
+      </p>
+
+      <button mat-raised-button (click)="deleteArtist(artist)">Delete</button>
+      <button mat-raised-button (click)="editArtist(artist)">
+        Edit
+      </button>
+
+    </div>
+    }
+  </div>
+
+</div>

@@ -1,0 +1,94 @@
+<div class="container">
+  <h2>{{ isEditMode ? 'Edit album' : 'New Album' }}</h2>
+  <form [formGroup]="albumForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="trackId" class="form-label">Track</label>
+      <select id="trackId" class="form-select" formControlName="trackId">
+        <option [ngValue]="null">-- Select artist --</option>
+        <option *ngFor="let c of allTrack" [ngValue]="c.id">{{ c.id}} {{ c.title}}</option>
+      </select>
+      <div *ngIf="albumForm.get('trackId')?.touched && albumForm.get('trackId')?.invalid" class="text-danger">
+        <small>Track is required.</small>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="albumName" class="form-label">album Name</label>
+      <input id="albumName" type="text" class="form-control" formControlName="albumName" />
+      <div *ngIf="albumForm.get('albumName')?.touched && albumForm.get('albumName')?.invalid" class="text-danger">
+        <small>Album name is required.</small>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="genre" class="form-label">Genre</label>
+      <input id="genre" type="text" class="form-control" formControlName="genre" />
+      <div *ngIf="albumForm.get('genre')?.touched && albumForm.get('genre')?.invalid" class="text-danger">
+        <small>Genre is required.</small>
+      </div>
+    </div>
+
+     <button type="submit" class="btn btn-success me-2" [disabled]="albumForm.invalid">
+      {{ isEditMode ? 'Update Class' : 'Create Class' }}
+    </button>
+    <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+
+
+  </form>
+    <div *ngIf="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
+
+<div>
+  <h1>Table</h1>
+  <table>
+    <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th style="width: 120px;">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let s of registeredArtists">
+          <td>{{ s.firstName }}</td>
+          <td>{{ s.lastName }}</td>
+
+            <!-- <button (click)="drop(s.id!)" class="btn btn-sm btn-danger">Drop</button>
+          </td>  -->
+        </tr>
+        <tr *ngIf="registeredArtists.length === 0">
+          <td colspan="4" class="text-center">No students registered yet.</td>
+        </tr>
+      </tbody>
+
+
+  </table>
+
+  <table class="table table-bordered">
+    <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th style="width: 120px;">Action</th>
+        </tr>
+      </thead>
+        <tbody>
+        <tr *ngFor="let s of allArtist">
+          <td>{{ s.firstName }}</td>
+          <td>{{ s.lastName }}</td>
+          <td>
+            <button
+              (click)="addArtistToAlbum(s.id!)"
+              class="btn btn-sm btn-success"
+              [disabled]="isRegistered(s)"
+            >
+              {{ isRegistered(s) ? 'Registered' : 'Register' }}
+            </button>
+          </td>
+        </tr>
+      </tbody>
+
+  </table>
+
+</div>
+
+</div>
